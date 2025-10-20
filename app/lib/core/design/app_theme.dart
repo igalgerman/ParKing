@@ -1,5 +1,5 @@
 /// ParKing App Theme
-/// 
+///
 /// Defines Material 3 theme with custom branding and responsive design.
 /// Provides both light and dark themes with consistent design tokens.
 library;
@@ -28,10 +28,10 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: parkingBackground,
-      
+
       // Typography
       textTheme: _buildTextTheme(colorScheme),
-      
+
       // App Bar
       appBarTheme: const AppBarTheme(
         centerTitle: true,
@@ -44,7 +44,7 @@ class AppTheme {
           color: parkingOnSurface,
         ),
       ),
-      
+
       // Card
       cardTheme: CardTheme(
         elevation: 2,
@@ -56,7 +56,7 @@ class AppTheme {
           vertical: spaceSmall,
         ),
       ),
-      
+
       // Elevated Button
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -75,7 +75,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Text Button
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -88,7 +88,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -114,7 +114,7 @@ class AppTheme {
           borderSide: const BorderSide(color: parkingError),
         ),
       ),
-      
+
       // Floating Action Button
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         elevation: 4,
@@ -122,7 +122,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(radiusLarge),
         ),
       ),
-      
+
       // Divider
       dividerTheme: const DividerThemeData(
         space: spaceMedium,
@@ -146,10 +146,10 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: colorScheme,
       scaffoldBackgroundColor: parkingBackgroundDark,
-      
+
       // Typography
       textTheme: _buildTextTheme(colorScheme),
-      
+
       // App Bar
       appBarTheme: const AppBarTheme(
         centerTitle: true,
@@ -162,7 +162,7 @@ class AppTheme {
           color: parkingOnSurfaceDark,
         ),
       ),
-      
+
       // Card
       cardTheme: CardTheme(
         elevation: 2,
@@ -175,7 +175,7 @@ class AppTheme {
           vertical: spaceSmall,
         ),
       ),
-      
+
       // Elevated Button
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -194,7 +194,7 @@ class AppTheme {
           ),
         ),
       ),
-      
+
       // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -235,7 +235,7 @@ class AppTheme {
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
-      
+
       // Headline styles
       headlineLarge: TextStyle(
         fontSize: 32,
@@ -252,7 +252,7 @@ class AppTheme {
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
-      
+
       // Title styles
       titleLarge: TextStyle(
         fontSize: 22,
@@ -271,7 +271,7 @@ class AppTheme {
         color: colorScheme.onSurface,
         letterSpacing: 0.1,
       ),
-      
+
       // Body styles
       bodyLarge: TextStyle(
         fontSize: 16,
@@ -291,7 +291,7 @@ class AppTheme {
         color: colorScheme.onSurfaceVariant,
         letterSpacing: 0.4,
       ),
-      
+
       // Label styles
       labelLarge: TextStyle(
         fontSize: 14,

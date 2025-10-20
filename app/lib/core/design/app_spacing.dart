@@ -1,5 +1,5 @@
 /// ParKing Design System Spacing
-/// 
+///
 /// Consistent spacing scale following 8px grid system.
 /// Use these constants throughout the app for uniform spacing.
 library;

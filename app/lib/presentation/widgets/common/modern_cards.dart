@@ -1,5 +1,5 @@
 /// Modern Glassmorphic Card Component
-/// 
+///
 /// Features blur effects, gradient borders, and contemporary styling.
 library;
 
@@ -161,9 +161,8 @@ class GradientContainer extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         gradient: gradient,
-        borderRadius: borderRadius != null
-            ? BorderRadius.circular(borderRadius!)
-            : null,
+        borderRadius:
+            borderRadius != null ? BorderRadius.circular(borderRadius!) : null,
       ),
       child: child,
     );

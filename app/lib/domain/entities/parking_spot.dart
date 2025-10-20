@@ -43,7 +43,8 @@ class ParkingSpot {
   }
 
   /// Whether the spot is currently available
-  bool get isAvailable => status == SpotStatus.active && DateTime.now().isBefore(expiresAt);
+  bool get isAvailable =>
+      status == SpotStatus.active && DateTime.now().isBefore(expiresAt);
 
   /// Whether the spot has expired
   bool get isExpired => DateTime.now().isAfter(expiresAt);
@@ -57,21 +58,24 @@ class ParkingSpot {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ParkingSpot && runtimeType == other.runtimeType && id == other.id;
+      other is ParkingSpot &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;
 
   @override
-  String toString() => 'ParkingSpot(id: $id, providerId: $providerId, status: $status)';
+  String toString() =>
+      'ParkingSpot(id: $id, providerId: $providerId, status: $status)';
 }
 
 /// Parking spot status
 enum SpotStatus {
-  active,     // Published and available
-  sold,       // Purchased by seeker
-  expired,    // Expired without purchase
-  cancelled,  // Manually cancelled by provider
+  active, // Published and available
+  sold, // Purchased by seeker
+  expired, // Expired without purchase
+  cancelled, // Manually cancelled by provider
 }
 
 /// Geographic location with accuracy

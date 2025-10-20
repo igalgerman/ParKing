@@ -221,8 +221,8 @@ class _SplashScreenState extends State<SplashScreen>
 
                         // App Name with gradient
                         ShaderMask(
-                          shaderCallback: (bounds) => design.warmGradient
-                              .createShader(
+                          shaderCallback: (bounds) =>
+                              design.warmGradient.createShader(
                             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                           ),
                           child: const Text(

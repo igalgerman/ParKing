@@ -162,8 +162,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                        prefixIcon: const Icon(Icons.email_outlined, color: Colors.white),
+                        labelStyle:
+                            TextStyle(color: Colors.white.withOpacity(0.8)),
+                        prefixIcon: const Icon(Icons.email_outlined,
+                            color: Colors.white),
                         filled: true,
                         fillColor: Colors.white.withOpacity(0.1),
                         border: OutlineInputBorder(
@@ -194,7 +196,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
-                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                            .hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
                         return null;
@@ -211,11 +214,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       onFieldSubmitted: (_) => _handleLogin(),
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                        prefixIcon: const Icon(Icons.lock_outline, color: Colors.white),
+                        labelStyle:
+                            TextStyle(color: Colors.white.withOpacity(0.8)),
+                        prefixIcon:
+                            const Icon(Icons.lock_outline, color: Colors.white),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                            _obscurePassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
                             color: Colors.white,
                           ),
                           onPressed: () {

@@ -79,7 +79,9 @@ class Transaction {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Transaction && runtimeType == other.runtimeType && id == other.id;
+      other is Transaction &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;
@@ -90,18 +92,18 @@ class Transaction {
 
 /// Transaction status lifecycle
 enum TransactionStatus {
-  pending,     // Purchased, waiting for verification
-  verified,    // Photo uploaded and approved
-  completed,   // Transaction successfully completed
-  disputed,    // Seeker reported issue
-  refunded,    // Refund issued
-  expired,     // Verification deadline passed
+  pending, // Purchased, waiting for verification
+  verified, // Photo uploaded and approved
+  completed, // Transaction successfully completed
+  disputed, // Seeker reported issue
+  refunded, // Refund issued
+  expired, // Verification deadline passed
 }
 
 /// Verification result from photo upload
 enum VerificationResult {
-  spotAvailable,  // Spot exists and is empty
-  spotOccupied,   // Spot exists but occupied
-  spotNotFound,   // Spot doesn't exist
-  pending,        // Under review
+  spotAvailable, // Spot exists and is empty
+  spotOccupied, // Spot exists but occupied
+  spotNotFound, // Spot doesn't exist
+  pending, // Under review
 }

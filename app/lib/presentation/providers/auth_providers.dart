@@ -91,7 +91,7 @@ final authStateProvider = StreamProvider<User?>((ref) {
 final currentUserProvider = FutureProvider<User?>((ref) async {
   final repository = ref.watch(authRepositoryProvider);
   final result = await repository.getCurrentUser();
-  
+
   return result.when(
     success: (user) => user,
     failure: (_) => null,

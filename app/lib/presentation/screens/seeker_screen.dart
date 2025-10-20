@@ -103,7 +103,8 @@ class _SeekerScreenState extends State<SeekerScreen> {
                 // Results Count
                 if (_spots.isNotEmpty)
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: spaceMedium),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: spaceMedium),
                     child: Row(
                       children: [
                         Text(
@@ -339,7 +340,8 @@ class _SeekerScreenState extends State<SeekerScreen> {
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
                           gradient: design.warmGradient,
-                          borderRadius: BorderRadius.circular(design.radiusMedium),
+                          borderRadius:
+                              BorderRadius.circular(design.radiusMedium),
                         ),
                         child: const Icon(
                           Icons.local_parking_rounded,
@@ -455,7 +457,8 @@ class _SeekerScreenState extends State<SeekerScreen> {
                           ),
                           decoration: BoxDecoration(
                             gradient: design.accentGradient,
-                            borderRadius: BorderRadius.circular(design.radiusSmall),
+                            borderRadius:
+                                BorderRadius.circular(design.radiusSmall),
                           ),
                           child: const Text(
                             'Get Spot',

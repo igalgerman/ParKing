@@ -16,13 +16,13 @@ class EnvironmentConfig {
       orElse: () => Environment.local,
     );
   }
-  
+
   /// Whether app is running in development mode.
   static bool get isDevelopment => current == Environment.local;
-  
+
   /// Whether app is running in staging mode.
   static bool get isStaging => current == Environment.staging;
-  
+
   /// Whether app is running in production mode.
   static bool get isProduction => current == Environment.production;
 }

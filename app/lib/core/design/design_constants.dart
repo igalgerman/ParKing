@@ -1,5 +1,5 @@
 /// Modern Design Constants for ParKing
-/// 
+///
 /// Contemporary visual design tokens including glassmorphism,
 /// blur effects, shadows, and modern styling parameters.
 library;

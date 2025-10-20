@@ -19,7 +19,8 @@ class FirebaseUserDataSource {
   /// Returns null if user doesn't exist.
   Future<UserDto?> getUserById(String userId) async {
     try {
-      final doc = await _firestore.collection(_collectionName).doc(userId).get();
+      final doc =
+          await _firestore.collection(_collectionName).doc(userId).get();
 
       if (!doc.exists) {
         return null;

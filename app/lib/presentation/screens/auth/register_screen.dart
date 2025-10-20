@@ -90,19 +90,19 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
   double _calculatePasswordStrength(String password) {
     if (password.isEmpty) return 0.0;
-    
+
     double strength = 0.0;
-    
+
     // Length
     if (password.length >= 8) strength += 0.25;
     if (password.length >= 12) strength += 0.25;
-    
+
     // Has uppercase
     if (RegExp(r'[A-Z]').hasMatch(password)) strength += 0.25;
-    
+
     // Has number
     if (RegExp(r'[0-9]').hasMatch(password)) strength += 0.25;
-    
+
     return strength.clamp(0.0, 1.0);
   }
 
@@ -206,8 +206,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         labelText: 'Full Name',
-                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                        prefixIcon: const Icon(Icons.person_outline, color: Colors.white),
+                        labelStyle:
+                            TextStyle(color: Colors.white.withOpacity(0.8)),
+                        prefixIcon: const Icon(Icons.person_outline,
+                            color: Colors.white),
                         filled: true,
                         fillColor: Colors.white.withOpacity(0.1),
                         border: OutlineInputBorder(
@@ -254,8 +256,10 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                        prefixIcon: const Icon(Icons.email_outlined, color: Colors.white),
+                        labelStyle:
+                            TextStyle(color: Colors.white.withOpacity(0.8)),
+                        prefixIcon: const Icon(Icons.email_outlined,
+                            color: Colors.white),
                         filled: true,
                         fillColor: Colors.white.withOpacity(0.1),
                         border: OutlineInputBorder(
@@ -286,7 +290,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         }
-                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                        if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                            .hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
                         return null;
@@ -303,11 +308,15 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       onChanged: (_) => setState(() {}),
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                        prefixIcon: const Icon(Icons.lock_outline, color: Colors.white),
+                        labelStyle:
+                            TextStyle(color: Colors.white.withOpacity(0.8)),
+                        prefixIcon:
+                            const Icon(Icons.lock_outline, color: Colors.white),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                            _obscurePassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
                             color: Colors.white,
                           ),
                           onPressed: () {
@@ -366,11 +375,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         children: [
                           Expanded(
                             child: LinearProgressIndicator(
-                              value: _calculatePasswordStrength(_passwordController.text),
+                              value: _calculatePasswordStrength(
+                                  _passwordController.text),
                               backgroundColor: Colors.white.withOpacity(0.2),
                               valueColor: AlwaysStoppedAnimation(
                                 _getPasswordStrengthColor(
-                                  _calculatePasswordStrength(_passwordController.text),
+                                  _calculatePasswordStrength(
+                                      _passwordController.text),
                                 ),
                               ),
                               minHeight: 6,
@@ -380,11 +391,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                           const SizedBox(width: spaceSmall),
                           Text(
                             _getPasswordStrengthLabel(
-                              _calculatePasswordStrength(_passwordController.text),
+                              _calculatePasswordStrength(
+                                  _passwordController.text),
                             ),
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: _getPasswordStrengthColor(
-                                _calculatePasswordStrength(_passwordController.text),
+                                _calculatePasswordStrength(
+                                    _passwordController.text),
                               ),
                               fontWeight: weightMedium,
                             ),
@@ -404,16 +417,21 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       onFieldSubmitted: (_) => _handleRegister(),
                       decoration: InputDecoration(
                         labelText: 'Confirm Password',
-                        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-                        prefixIcon: const Icon(Icons.lock_outline, color: Colors.white),
+                        labelStyle:
+                            TextStyle(color: Colors.white.withOpacity(0.8)),
+                        prefixIcon:
+                            const Icon(Icons.lock_outline, color: Colors.white),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscureConfirmPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                            _obscureConfirmPassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
                             color: Colors.white,
                           ),
                           onPressed: () {
                             setState(() {
-                              _obscureConfirmPassword = !_obscureConfirmPassword;
+                              _obscureConfirmPassword =
+                                  !_obscureConfirmPassword;
                             });
                           },
                         ),

@@ -5,7 +5,7 @@ import '../../core/design/app_spacing.dart';
 import '../../core/design/design_constants.dart' as design;
 
 /// Home screen - Modern branded entry point
-/// 
+///
 /// Features vibrant gradients, glassmorphism, and contemporary design
 class HomeScreen extends StatelessWidget {
   static const route = '/home';
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                             },
                           ),
                           const SizedBox(height: spaceMedium),
-                          
+
                           // App name with shadow
                           Text(
                             'ParKing',
@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: spaceSmall),
-                          
+
                           // Tagline
                           Text(
                             'Modern Parking Made Simple',
@@ -140,15 +140,15 @@ class HomeScreen extends StatelessWidget {
                               'Welcome Back! 👋',
                               style: theme.textTheme.headlineSmall?.copyWith(
                                 color: Colors.white,
-                                    fontWeight: design.weightBold,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                const SizedBox(height: spaceSmall),
-                                Text(
-                                  'Choose your role to get started',
-                                  style: theme.textTheme.bodyLarge?.copyWith(
-                                    color: Colors.white.withOpacity(0.9),
+                                fontWeight: design.weightBold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: spaceSmall),
+                            Text(
+                              'Choose your role to get started',
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                color: Colors.white.withOpacity(0.9),
                                 fontWeight: design.weightBold,
                               ),
                               textAlign: TextAlign.center,
@@ -175,7 +175,8 @@ class HomeScreen extends StatelessWidget {
                         gradient: const LinearGradient(
                           colors: [parkingPrimary, parkingPrimaryDark],
                         ),
-                        onTap: () => Navigator.of(context).pushNamed('/provider'),
+                        onTap: () =>
+                            Navigator.of(context).pushNamed('/provider'),
                       ),
                       const SizedBox(height: spaceMedium),
 
@@ -202,7 +203,8 @@ class HomeScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(spaceMedium),
                             decoration: BoxDecoration(
                               color: Colors.white.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(design.radiusLarge),
+                              borderRadius:
+                                  BorderRadius.circular(design.radiusLarge),
                               border: Border.all(
                                 color: Colors.white.withOpacity(0.2),
                                 width: 1,
@@ -329,7 +331,8 @@ class _ModernRoleCardState extends State<_ModernRoleCard>
                       padding: const EdgeInsets.all(spaceMedium),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(design.radiusMedium),
+                        borderRadius:
+                            BorderRadius.circular(design.radiusMedium),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.white.withOpacity(0.3),
@@ -345,7 +348,7 @@ class _ModernRoleCardState extends State<_ModernRoleCard>
                       ),
                     ),
                     const SizedBox(width: spaceMedium),
-                    
+
                     // Text content
                     Expanded(
                       child: Column(
@@ -368,7 +371,7 @@ class _ModernRoleCardState extends State<_ModernRoleCard>
                         ],
                       ),
                     ),
-                    
+
                     // Arrow with animation hint
                     Container(
                       padding: const EdgeInsets.all(spaceSmall),

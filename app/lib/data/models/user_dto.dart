@@ -118,7 +118,8 @@ class UserSettingsDto {
   factory UserSettingsDto.fromMap(Map<String, dynamic> map) {
     return UserSettingsDto(
       notificationsEnabled: map['notificationsEnabled'] as bool? ?? true,
-      defaultSearchRadius: (map['defaultSearchRadius'] as num?)?.toDouble() ?? 1.0,
+      defaultSearchRadius:
+          (map['defaultSearchRadius'] as num?)?.toDouble() ?? 1.0,
       preferredLanguage: map['preferredLanguage'] as String? ?? 'en',
       biometricEnabled: map['biometricEnabled'] as bool? ?? false,
     );

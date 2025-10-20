@@ -1,5 +1,5 @@
 /// ParKing App Color Palette - Modern Branding
-/// 
+///
 /// Contemporary design with vibrant gradients, glassmorphism, and bold accents.
 /// Inspired by modern mobile app design trends with premium feel.
 library;

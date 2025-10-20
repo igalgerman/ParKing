@@ -319,7 +319,8 @@ class _ProviderScreenState extends State<ProviderScreen>
               Row(
                 children: [
                   Expanded(
-                    child: _buildStatItem('Spots Published', '1', Icons.check_circle_outline),
+                    child: _buildStatItem(
+                        'Spots Published', '1', Icons.check_circle_outline),
                   ),
                   Container(
                     width: 1,
@@ -327,7 +328,8 @@ class _ProviderScreenState extends State<ProviderScreen>
                     color: Colors.white.withOpacity(0.2),
                   ),
                   Expanded(
-                    child: _buildStatItem('Total Views', '12', Icons.visibility_outlined),
+                    child: _buildStatItem(
+                        'Total Views', '12', Icons.visibility_outlined),
                   ),
                 ],
               ),

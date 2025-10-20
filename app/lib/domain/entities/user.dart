@@ -71,9 +71,9 @@ class User {
 
 /// User role in the system
 enum UserRole {
-  provider,  // Publishes parking spots
-  seeker,    // Searches for parking spots
-  both,      // Can switch between roles
+  provider, // Publishes parking spots
+  seeker, // Searches for parking spots
+  both, // Can switch between roles
 }
 
 /// User statistics
@@ -99,7 +99,8 @@ class UserStats {
     return UserStats(
       spotsPublished: spotsPublished ?? this.spotsPublished,
       spotsPurchased: spotsPurchased ?? this.spotsPurchased,
-      successfulTransactions: successfulTransactions ?? this.successfulTransactions,
+      successfulTransactions:
+          successfulTransactions ?? this.successfulTransactions,
       disputedTransactions: disputedTransactions ?? this.disputedTransactions,
     );
   }

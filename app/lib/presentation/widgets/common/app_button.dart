@@ -1,5 +1,5 @@
 /// Reusable button component with consistent styling.
-/// 
+///
 /// Supports multiple variants (primary, secondary, text) and sizes.
 /// Includes loading state and disabled state handling.
 library;
@@ -110,9 +110,7 @@ class AppButton extends StatelessWidget {
               if (icon != null) ...[
                 Icon(
                   icon,
-                  size: size == AppButtonSize.small
-                      ? iconSmall
-                      : iconMedium,
+                  size: size == AppButtonSize.small ? iconSmall : iconMedium,
                 ),
                 const SizedBox(width: spaceSmall),
               ],
@@ -180,8 +178,6 @@ class AppButton extends StatelessWidget {
         ),
     };
 
-    return fullWidth
-        ? SizedBox(width: double.infinity, child: button)
-        : button;
+    return fullWidth ? SizedBox(width: double.infinity, child: button) : button;
   }
 }

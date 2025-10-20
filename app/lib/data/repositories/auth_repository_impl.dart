@@ -144,7 +144,8 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = UserMapper.toDomain(userDto);
       return Success(user);
     } catch (e) {
-      return Failure(NetworkError('Failed to get current user: ${e.toString()}'));
+      return Failure(
+          NetworkError('Failed to get current user: ${e.toString()}'));
     }
   }
 
@@ -184,7 +185,8 @@ class AuthRepositoryImpl implements AuthRepository {
       }
 
       // Get current user data from Firestore
-      final currentUserDto = await _userDataSource.getUserById(currentFirebaseUser.uid);
+      final currentUserDto =
+          await _userDataSource.getUserById(currentFirebaseUser.uid);
 
       if (currentUserDto == null) {
         return const Failure(
