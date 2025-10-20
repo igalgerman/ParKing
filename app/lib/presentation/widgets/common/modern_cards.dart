@@ -5,7 +5,6 @@ library;
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:app/core/design/app_colors.dart';
 import 'package:app/core/design/design_constants.dart';
 import 'package:app/core/design/app_spacing.dart';
 

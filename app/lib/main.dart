@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart'; // Uncomment after Firebase setup
 import 'package:app/core/design/app_theme.dart';
 import 'package:app/core/design/app_colors.dart';
 import 'package:app/core/design/design_constants.dart' as design;

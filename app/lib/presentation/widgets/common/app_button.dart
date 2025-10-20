@@ -5,7 +5,18 @@
 library;
 
 import 'package:flutter/material.dart';
-import '../../core/design/app_spacing.dart';
+import '../../../core/design/design_constants.dart';
+
+// Button height constants
+const double buttonHeightSmall = 36.0;
+const double buttonHeightMedium = 48.0;
+const double buttonHeightLarge = 56.0;
+
+// Spacing constants (matching Material Design)
+const double spaceSmall = 8.0;
+const double spaceMedium = 16.0;
+const double spaceLarge = 24.0;
+const double spaceXLarge = 32.0;
 
 /// Button variant type
 enum AppButtonVariant {
@@ -80,8 +91,8 @@ class AppButton extends StatelessWidget {
 
     final Widget buttonContent = isLoading
         ? SizedBox(
-            height: iconSizeMedium,
-            width: iconSizeMedium,
+            height: iconMedium,
+            width: iconMedium,
             child: CircularProgressIndicator(
               strokeWidth: 2,
               valueColor: AlwaysStoppedAnimation<Color>(
@@ -100,8 +111,8 @@ class AppButton extends StatelessWidget {
                 Icon(
                   icon,
                   size: size == AppButtonSize.small
-                      ? iconSizeSmall
-                      : iconSizeMedium,
+                      ? iconSmall
+                      : iconMedium,
                 ),
                 const SizedBox(width: spaceSmall),
               ],
