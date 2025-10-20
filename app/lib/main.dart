@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:firebase_core/firebase_core.dart'; // Uncomment after Firebase setup
+import 'package:firebase_core/firebase_core.dart';
 import 'package:app/core/design/app_theme.dart';
 import 'package:app/core/design/app_colors.dart';
 import 'package:app/core/design/design_constants.dart' as design;
@@ -11,7 +11,7 @@ import 'package:app/presentation/screens/provider_screen.dart';
 import 'package:app/presentation/screens/seeker_screen.dart';
 import 'package:app/presentation/screens/auth/login_screen.dart';
 import 'package:app/presentation/screens/auth/register_screen.dart';
-// import 'firebase_options.dart'; // Uncomment after running flutterfire configure
+import 'firebase_options.dart';
 
 /// Main entry point of the ParKing POC application.
 /// Initializes Firebase and Riverpod for state management.
@@ -20,10 +20,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Firebase
-  // Uncomment after running `flutterfire configure`
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(
     const ProviderScope(

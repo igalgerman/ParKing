@@ -44,6 +44,52 @@ abstract class AuthRepository {
     required String displayName,
   });
 
+  /// Signs in with Google account.
+  ///
+  /// Opens Google Sign-In flow and authenticates the user.
+  /// Returns [Result<User>] with the authenticated user on success,
+  /// or [Failure] if sign-in is cancelled or fails.
+  ///
+  /// Note: Requires Google Sign-In to be enabled in Firebase Console.
+  Future<Result<User>> signInWithGoogle();
+
+  /// Signs in with Apple account.
+  ///
+  /// Opens Apple Sign-In flow and authenticates the user.
+  /// Returns [Result<User>] with the authenticated user on success,
+  /// or [Failure] if sign-in is cancelled or fails.
+  ///
+  /// Note: Requires Apple Sign-In to be enabled in Firebase Console.
+  /// Required for iOS apps on App Store.
+  Future<Result<User>> signInWithApple();
+
+  /// Initiates phone number authentication.
+  ///
+  /// Sends a verification code to the provided phone number.
+  /// Returns [Result<String>] with the verification ID on success.
+  ///
+  /// Parameters:
+  /// - [phoneNumber]: Phone number in E.164 format (e.g., +1234567890)
+  ///
+  /// After receiving the verification ID, call [verifyPhoneNumber]
+  /// with the SMS code to complete authentication.
+  Future<Result<String>> sendPhoneVerificationCode({
+    required String phoneNumber,
+  });
+
+  /// Completes phone number authentication with SMS code.
+  ///
+  /// Verifies the SMS code and authenticates the user.
+  /// Returns [Result<User>] with the authenticated user on success.
+  ///
+  /// Parameters:
+  /// - [verificationId]: ID returned from [sendPhoneVerificationCode]
+  /// - [smsCode]: 6-digit code sent to the user's phone
+  Future<Result<User>> verifyPhoneNumber({
+    required String verificationId,
+    required String smsCode,
+  });
+
   /// Logs out the current user.
   ///
   /// Returns [Result<void>] indicating success or failure.

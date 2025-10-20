@@ -5,6 +5,8 @@
 library;
 
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// Service for Firebase Authentication operations.
 ///
@@ -12,9 +14,13 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 /// The data layer will call this service and handle errors.
 class FirebaseAuthService {
   final firebase_auth.FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
 
-  FirebaseAuthService({firebase_auth.FirebaseAuth? firebaseAuth})
-      : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
+  FirebaseAuthService({
+    firebase_auth.FirebaseAuth? firebaseAuth,
+    GoogleSignIn? googleSignIn,
+  })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance,
+        _googleSignIn = googleSignIn ?? GoogleSignIn();
 
   /// Gets the currently authenticated Firebase user.
   ///
@@ -95,4 +101,110 @@ class FirebaseAuthService {
   Future<void> reloadUser() async {
     await _firebaseAuth.currentUser?.reload();
   }
+
+  /// Signs in with Google account.
+  ///
+  /// Opens Google Sign-In flow and returns Firebase credential.
+  /// Throws [firebase_auth.FirebaseAuthException] or [GoogleSignIn] exceptions on failure.
+  Future<firebase_auth.UserCredential> signInWithGoogle() async {
+    // Trigger the Google Sign-In flow
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+    if (googleUser == null) {
+      // User cancelled the sign-in
+      throw firebase_auth.FirebaseAuthException(
+        code: 'ERROR_ABORTED_BY_USER',
+        message: 'Sign in aborted by user',
+      );
+    }
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser.authentication;
+
+    // Create a new credential
+    final credential = firebase_auth.GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    // Sign in to Firebase with the Google credential
+    return await _firebaseAuth.signInWithCredential(credential);
+  }
+
+  /// Signs in with Apple account.
+  ///
+  /// Opens Apple Sign-In flow and returns Firebase credential.
+  /// Throws [firebase_auth.FirebaseAuthException] or [SignInWithAppleException] on failure.
+  Future<firebase_auth.UserCredential> signInWithApple() async {
+    // Request Apple ID credential
+    final appleCredential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+
+    // Create an OAuthProvider credential
+    final oauthCredential = firebase_auth.OAuthProvider('apple.com').credential(
+      idToken: appleCredential.identityToken,
+      accessToken: appleCredential.authorizationCode,
+    );
+
+    // Sign in to Firebase with the Apple credential
+    return await _firebaseAuth.signInWithCredential(oauthCredential);
+  }
+
+  /// Verifies a phone number and triggers SMS code sending.
+  ///
+  /// This method initiates phone authentication. Firebase will send an SMS
+  /// with a verification code to the provided phone number.
+  ///
+  /// Parameters:
+  /// - [phoneNumber]: Phone number in E.164 format (e.g., +1234567890)
+  /// - [onCodeSent]: Callback when SMS code is sent successfully
+  /// - [onVerificationCompleted]: Callback for auto-verification (Android only)
+  /// - [onVerificationFailed]: Callback when verification fails
+  ///
+  /// Returns the verification ID needed to complete sign-in.
+  Future<void> verifyPhoneNumber({
+    required String phoneNumber,
+    required void Function(String verificationId, int? resendToken) onCodeSent,
+    required void Function(firebase_auth.PhoneAuthCredential credential)
+        onVerificationCompleted,
+    required void Function(firebase_auth.FirebaseAuthException error)
+        onVerificationFailed,
+  }) async {
+    await _firebaseAuth.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: onVerificationCompleted,
+      verificationFailed: onVerificationFailed,
+      codeSent: onCodeSent,
+      codeAutoRetrievalTimeout: (String verificationId) {
+        // Auto-resolution timed out
+      },
+    );
+  }
+
+  /// Signs in with phone number using verification code.
+  ///
+  /// Completes the phone authentication flow by verifying the SMS code.
+  ///
+  /// Parameters:
+  /// - [verificationId]: ID received in onCodeSent callback
+  /// - [smsCode]: 6-digit code sent to user's phone
+  Future<firebase_auth.UserCredential> signInWithPhoneNumber({
+    required String verificationId,
+    required String smsCode,
+  }) async {
+    // Create a PhoneAuthCredential with the code
+    final credential = firebase_auth.PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: smsCode,
+    );
+
+    // Sign in to Firebase with the phone credential
+    return await _firebaseAuth.signInWithCredential(credential);
+  }
 }
+

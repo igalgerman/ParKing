@@ -260,6 +260,224 @@ class AuthRepositoryImpl implements AuthRepository {
     });
   }
 
+  @override
+  Future<Result<User>> signInWithGoogle() async {
+    try {
+      // Sign in with Google via Firebase Auth Service
+      final credential = await _authService.signInWithGoogle();
+
+      if (credential.user == null) {
+        return const Failure(
+          AuthenticationError('Google sign-in failed - no user returned'),
+        );
+      }
+
+      final firebaseUser = credential.user!;
+
+      // Check if user document exists in Firestore
+      final existingUser = await _userDataSource.getUserById(firebaseUser.uid);
+
+      if (existingUser != null) {
+        // Existing user - update last login
+        await _userDataSource.updateLastLogin(firebaseUser.uid);
+        return Success(UserMapper.fromDto(existingUser));
+      }
+
+      // New user - create Firestore document
+      final newUserDto = UserDto(
+        id: firebaseUser.uid,
+        email: firebaseUser.email!,
+        displayName: firebaseUser.displayName,
+        phoneNumber: firebaseUser.phoneNumber,
+        photoUrl: firebaseUser.photoURL,
+        role: 'both',
+        createdAt: Timestamp.now(),
+        lastLoginAt: Timestamp.now(),
+        stats: UserStatsDto(
+          spotsPublished: 0,
+          spotsPurchased: 0,
+          successfulTransactions: 0,
+          disputedTransactions: 0,
+        ),
+        settings: UserSettingsDto(
+          notificationsEnabled: true,
+          defaultSearchRadius: 1.0,
+          preferredLanguage: 'en',
+          biometricEnabled: false,
+        ),
+      );
+
+      await _userDataSource.createUser(newUserDto);
+
+      return Success(UserMapper.fromDto(newUserDto));
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return Failure(_mapFirebaseAuthError(e));
+    } catch (e) {
+      return Failure(AuthenticationError('Google sign-in failed: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Result<User>> signInWithApple() async {
+    try {
+      // Sign in with Apple via Firebase Auth Service
+      final credential = await _authService.signInWithApple();
+
+      if (credential.user == null) {
+        return const Failure(
+          AuthenticationError('Apple sign-in failed - no user returned'),
+        );
+      }
+
+      final firebaseUser = credential.user!;
+
+      // Check if user document exists in Firestore
+      final existingUser = await _userDataSource.getUserById(firebaseUser.uid);
+
+      if (existingUser != null) {
+        // Existing user - update last login
+        await _userDataSource.updateLastLogin(firebaseUser.uid);
+        return Success(UserMapper.fromDto(existingUser));
+      }
+
+      // New user - create Firestore document
+      final newUserDto = UserDto(
+        id: firebaseUser.uid,
+        email: firebaseUser.email ?? 'private@appleid.com',
+        displayName: firebaseUser.displayName ?? 'Apple User',
+        phoneNumber: firebaseUser.phoneNumber,
+        photoUrl: firebaseUser.photoURL,
+        role: 'both',
+        createdAt: Timestamp.now(),
+        lastLoginAt: Timestamp.now(),
+        stats: UserStatsDto(
+          spotsPublished: 0,
+          spotsPurchased: 0,
+          successfulTransactions: 0,
+          disputedTransactions: 0,
+        ),
+        settings: UserSettingsDto(
+          notificationsEnabled: true,
+          defaultSearchRadius: 1.0,
+          preferredLanguage: 'en',
+          biometricEnabled: false,
+        ),
+      );
+
+      await _userDataSource.createUser(newUserDto);
+
+      return Success(UserMapper.fromDto(newUserDto));
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return Failure(_mapFirebaseAuthError(e));
+    } catch (e) {
+      return Failure(AuthenticationError('Apple sign-in failed: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Result<String>> sendPhoneVerificationCode({
+    required String phoneNumber,
+  }) async {
+    try {
+      String? verificationId;
+      firebase_auth.FirebaseAuthException? authError;
+
+      await _authService.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        onCodeSent: (String verId, int? resendToken) {
+          verificationId = verId;
+        },
+        onVerificationCompleted: (firebase_auth.PhoneAuthCredential credential) {
+          // Auto-verification completed (Android only)
+          // This will be handled in the UI layer
+        },
+        onVerificationFailed: (firebase_auth.FirebaseAuthException error) {
+          authError = error;
+        },
+      );
+
+      // Wait a moment for the callback to complete
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      if (authError != null) {
+        return Failure(_mapFirebaseAuthError(authError!));
+      }
+
+      if (verificationId == null) {
+        return const Failure(
+          AuthenticationError('Failed to send verification code'),
+        );
+      }
+
+      return Success(verificationId!);
+    } catch (e) {
+      return Failure(AuthenticationError('Phone verification failed: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Result<User>> verifyPhoneNumber({
+    required String verificationId,
+    required String smsCode,
+  }) async {
+    try {
+      // Sign in with phone number
+      final credential = await _authService.signInWithPhoneNumber(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      );
+
+      if (credential.user == null) {
+        return const Failure(
+          AuthenticationError('Phone verification failed - no user returned'),
+        );
+      }
+
+      final firebaseUser = credential.user!;
+
+      // Check if user document exists in Firestore
+      final existingUser = await _userDataSource.getUserById(firebaseUser.uid);
+
+      if (existingUser != null) {
+        // Existing user - update last login
+        await _userDataSource.updateLastLogin(firebaseUser.uid);
+        return Success(UserMapper.fromDto(existingUser));
+      }
+
+      // New user - create Firestore document
+      final newUserDto = UserDto(
+        id: firebaseUser.uid,
+        email: firebaseUser.email ?? 'phone@parking.com',
+        displayName: firebaseUser.displayName ?? 'Phone User',
+        phoneNumber: firebaseUser.phoneNumber,
+        photoUrl: firebaseUser.photoURL,
+        role: 'both',
+        createdAt: Timestamp.now(),
+        lastLoginAt: Timestamp.now(),
+        stats: UserStatsDto(
+          spotsPublished: 0,
+          spotsPurchased: 0,
+          successfulTransactions: 0,
+          disputedTransactions: 0,
+        ),
+        settings: UserSettingsDto(
+          notificationsEnabled: true,
+          defaultSearchRadius: 1.0,
+          preferredLanguage: 'en',
+          biometricEnabled: false,
+        ),
+      );
+
+      await _userDataSource.createUser(newUserDto);
+
+      return Success(UserMapper.fromDto(newUserDto));
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return Failure(_mapFirebaseAuthError(e));
+    } catch (e) {
+      return Failure(AuthenticationError('Phone verification failed: ${e.toString()}'));
+    }
+  }
+
   /// Maps Firebase Auth exceptions to domain errors.
   AppError _mapFirebaseAuthError(firebase_auth.FirebaseAuthException e) {
     switch (e.code) {
@@ -279,8 +497,15 @@ class AuthRepositoryImpl implements AuthRepository {
         return const NetworkError('Too many attempts. Try again later');
       case 'network-request-failed':
         return const NetworkError('Network error. Check your connection');
+      case 'ERROR_ABORTED_BY_USER':
+        return const AuthenticationError('Sign-in cancelled by user');
+      case 'invalid-verification-code':
+        return const ValidationError('Invalid verification code');
+      case 'invalid-phone-number':
+        return const ValidationError('Invalid phone number');
       default:
         return AuthenticationError(e.message ?? 'Authentication failed');
     }
   }
 }
+
