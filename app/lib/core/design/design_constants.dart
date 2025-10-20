@@ -34,10 +34,10 @@ ImageFilter get glassBlurFilterHeavy => ImageFilter.blur(
 
 /// Primary shadow with purple tint - for primary buttons and cards
 List<BoxShadow> get primaryShadow => [
-      BoxShadow(
+      const BoxShadow(
         color: parkingShadowPrimary,
         blurRadius: 20,
-        offset: const Offset(0, 10),
+        offset: Offset(0, 10),
         spreadRadius: 0,
       ),
       BoxShadow(
@@ -50,36 +50,36 @@ List<BoxShadow> get primaryShadow => [
 
 /// Secondary shadow with cyan tint
 List<BoxShadow> get secondaryShadow => [
-      BoxShadow(
+      const BoxShadow(
         color: parkingShadowSecondary,
         blurRadius: 20,
-        offset: const Offset(0, 10),
+        offset: Offset(0, 10),
         spreadRadius: 0,
       ),
     ];
 
 /// Accent shadow with pink tint
 List<BoxShadow> get accentShadow => [
-      BoxShadow(
+      const BoxShadow(
         color: parkingShadowAccent,
         blurRadius: 24,
-        offset: const Offset(0, 12),
+        offset: Offset(0, 12),
         spreadRadius: -2,
       ),
     ];
 
 /// Soft neutral shadow for cards
 List<BoxShadow> get cardShadow => [
-      BoxShadow(
+      const BoxShadow(
         color: parkingShadowNeutral,
         blurRadius: 16,
-        offset: const Offset(0, 4),
+        offset: Offset(0, 4),
         spreadRadius: 0,
       ),
-      BoxShadow(
+      const BoxShadow(
         color: parkingShadowNeutral,
         blurRadius: 32,
-        offset: const Offset(0, 8),
+        offset: Offset(0, 8),
         spreadRadius: -4,
       ),
     ];

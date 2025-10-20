@@ -157,7 +157,7 @@ class _ProviderScreenState extends State<ProviderScreen>
             const SizedBox(height: 32),
 
             // Title
-            Text(
+            const Text(
               'No Active Spot',
               style: TextStyle(
                 fontSize: 28,
@@ -210,15 +210,15 @@ class _ProviderScreenState extends State<ProviderScreen>
                       gradient: design.warmGradient,
                       borderRadius: BorderRadius.circular(design.radiusSmall),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.circle,
                           size: 8,
                           color: Colors.white,
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         Text(
                           'ACTIVE',
                           style: TextStyle(
@@ -252,7 +252,7 @@ class _ProviderScreenState extends State<ProviderScreen>
               const SizedBox(height: 20),
 
               // Location Info
-              Text(
+              const Text(
                 'Your Parking Spot',
                 style: TextStyle(
                   fontSize: 22,
@@ -307,7 +307,7 @@ class _ProviderScreenState extends State<ProviderScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Today\'s Stats',
                 style: TextStyle(
                   fontSize: 18,
@@ -381,7 +381,7 @@ class _ProviderScreenState extends State<ProviderScreen>
         const Spacer(),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 14,
             fontWeight: design.weightSemiBold,
             color: Colors.white,
@@ -402,7 +402,7 @@ class _ProviderScreenState extends State<ProviderScreen>
         const SizedBox(height: 8),
         Text(
           value,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: design.weightBold,
             color: Colors.white,
@@ -460,7 +460,7 @@ class _ProviderScreenState extends State<ProviderScreen>
                 const SizedBox(width: 12),
                 Text(
                   _isPublishing ? 'Publishing...' : 'Publish Parking Spot',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: design.weightBold,
                     color: Colors.white,

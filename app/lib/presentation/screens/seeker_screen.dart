@@ -251,7 +251,7 @@ class _SeekerScreenState extends State<SeekerScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
+            const Text(
               'No spots found nearby',
               style: TextStyle(
                 fontSize: 22,
@@ -354,7 +354,7 @@ class _SeekerScreenState extends State<SeekerScreen> {
                           children: [
                             Text(
                               spot.location,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: design.weightBold,
                                 color: Colors.white,
@@ -411,7 +411,7 @@ class _SeekerScreenState extends State<SeekerScreen> {
                     ),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.star_rounded,
                           size: design.iconSmall,
                           color: Colors.amber,
@@ -419,7 +419,7 @@ class _SeekerScreenState extends State<SeekerScreen> {
                         const SizedBox(width: 4),
                         Text(
                           spot.rating.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             fontWeight: design.weightSemiBold,
                             color: Colors.white,
@@ -433,7 +433,7 @@ class _SeekerScreenState extends State<SeekerScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Icon(
+                        const Icon(
                           Icons.verified_rounded,
                           size: design.iconSmall,
                           color: parkingSecondary,
@@ -457,7 +457,7 @@ class _SeekerScreenState extends State<SeekerScreen> {
                             gradient: design.accentGradient,
                             borderRadius: BorderRadius.circular(design.radiusSmall),
                           ),
-                          child: Text(
+                          child: const Text(
                             'Get Spot',
                             style: TextStyle(
                               fontSize: 14,

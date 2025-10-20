@@ -33,12 +33,12 @@ class AppTheme {
       textTheme: _buildTextTheme(colorScheme),
       
       // App Bar
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         centerTitle: true,
         elevation: 0,
         backgroundColor: parkingSurface,
         foregroundColor: parkingOnSurface,
-        titleTextStyle: const TextStyle(
+        titleTextStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: parkingOnSurface,
@@ -151,12 +151,12 @@ class AppTheme {
       textTheme: _buildTextTheme(colorScheme),
       
       // App Bar
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         centerTitle: true,
         elevation: 0,
         backgroundColor: parkingSurfaceDark,
         foregroundColor: parkingOnSurfaceDark,
-        titleTextStyle: const TextStyle(
+        titleTextStyle: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: parkingOnSurfaceDark,

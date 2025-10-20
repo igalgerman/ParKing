@@ -9,6 +9,8 @@ import 'package:app/core/design/design_constants.dart' as design;
 import 'package:app/presentation/screens/home_screen.dart';
 import 'package:app/presentation/screens/provider_screen.dart';
 import 'package:app/presentation/screens/seeker_screen.dart';
+import 'package:app/presentation/screens/auth/login_screen.dart';
+import 'package:app/presentation/screens/auth/register_screen.dart';
 // import 'firebase_options.dart'; // Uncomment after running flutterfire configure
 
 /// Main entry point of the ParKing POC application.
@@ -48,6 +50,8 @@ class ParKingApp extends StatelessWidget {
         HomeScreen.route: (_) => const HomeScreen(),
         ProviderScreen.route: (_) => const ProviderScreen(),
         SeekerScreen.route: (_) => const SeekerScreen(),
+        '/login': (_) => const LoginScreen(),
+        '/register': (_) => const RegisterScreen(),
       },
     );
   }
@@ -125,10 +129,10 @@ class _SplashScreenState extends State<SplashScreen>
       }
     });
 
-    // Navigate to Home after delay
+    // Navigate to Login after delay
     _navTimer = Timer(const Duration(milliseconds: 2000), () {
       if (!mounted) return;
-      Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+      Navigator.of(context).pushReplacementNamed('/login');
     });
   }
 
@@ -221,7 +225,7 @@ class _SplashScreenState extends State<SplashScreen>
                               .createShader(
                             Rect.fromLTWH(0, 0, bounds.width, bounds.height),
                           ),
-                          child: Text(
+                          child: const Text(
                             'ParKing',
                             style: TextStyle(
                               fontSize: 48,

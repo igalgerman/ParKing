@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           // Animated gradient background with spotlight
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -376,7 +376,7 @@ class _ModernRoleCardState extends State<_ModernRoleCard>
                         color: Colors.white.withOpacity(0.2),
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_forward_rounded,
                         color: Colors.white,
                         size: design.iconMedium,
