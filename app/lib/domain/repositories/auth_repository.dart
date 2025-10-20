@@ -53,16 +53,6 @@ abstract class AuthRepository {
   /// Note: Requires Google Sign-In to be enabled in Firebase Console.
   Future<Result<User>> signInWithGoogle();
 
-  /// Signs in with Apple account.
-  ///
-  /// Opens Apple Sign-In flow and authenticates the user.
-  /// Returns [Result<User>] with the authenticated user on success,
-  /// or [Failure] if sign-in is cancelled or fails.
-  ///
-  /// Note: Requires Apple Sign-In to be enabled in Firebase Console.
-  /// Required for iOS apps on App Store.
-  Future<Result<User>> signInWithApple();
-
   /// Initiates phone number authentication.
   ///
   /// Sends a verification code to the provided phone number.

@@ -4,9 +4,11 @@
 
 ParKing supports **multiple authentication methods** powered by Firebase Authentication, providing users with flexibility and convenience.
 
+**POC Scope**: Email/Password, Google Sign-In, and Phone Authentication are implemented for the POC phase. Apple Sign-In is planned for Phase 2.
+
 ---
 
-## Supported Authentication Methods
+## Supported Authentication Methods (POC)
 
 ### ✅ 1. Email/Password Authentication
 
@@ -65,45 +67,31 @@ final result = await authRepository.signInWithGoogle();
 
 ---
 
-### ✅ 3. Apple Sign-In
+### ⏳ 3. Apple Sign-In
 
-**Status**: ✅ Fully Implemented
+**Status**: ⏳ Planned for Phase 2
 
-**How it works**:
+**Why deferred to Phase 2**:
+- Not required for POC validation
+- Requires Apple Developer Program membership ($99/year)
+- Complex setup process (Service ID, Key configuration)
+- Only needed for iOS App Store submission
+
+**Future Implementation**:
 - One-click sign-in with Apple ID
 - Required for iOS apps on App Store
 - Privacy-focused (can hide email)
 - Native iOS integration
 
-**User Flow**:
-1. User taps "Sign in with Apple" button
-2. Apple Sign-In prompt appears
-3. User authenticates with Face ID/Touch ID or password
-4. Firebase authenticates with Apple credentials
-5. User logged in (creates account if new)
-
-**Code**:
-```dart
-final result = await authRepository.signInWithApple();
-```
-
-**Setup Required**:
-1. **Firebase Console**:
-   - Enable "Apple" provider in Authentication → Sign-in method
-   - Configure Service ID
-2. **Apple Developer Account**:
-   - Enable "Sign in with Apple" capability
-   - Configure Service ID and Key
-3. **iOS App**:
-   - Add capability in Xcode
-
 **Platform Support**: iOS, macOS, Web (with limitations)
+
+**Note**: Code implementation will be added in Phase 2 when Apple Developer account is available.
 
 ---
 
 ### ✅ 4. Phone Number Authentication
 
-**Status**: ✅ Fully Implemented
+**Status**: ✅ Fully Implemented (POC)
 
 **How it works**:
 - SMS-based verification
@@ -193,24 +181,24 @@ result.when(
 
 ## Firebase Console Setup Checklist
 
-### Before Users Can Sign In
+### POC Phase - Enabled Providers
 
-- [ ] **Email/Password**:
-  - [ ] Enable in Firebase Console → Authentication → Sign-in method
+- [x] **Email/Password**:
+  - [x] Enable in Firebase Console → Authentication → Sign-in method
   
-- [ ] **Google Sign-In**:
-  - [ ] Enable Google provider
-  - [ ] Add authorized domains
+- [x] **Google Sign-In**:
+  - [x] Enable Google provider
+  - [x] Add authorized domains
   
-- [ ] **Apple Sign-In** (if supporting iOS):
-  - [ ] Enable Apple provider
-  - [ ] Configure Service ID in Apple Developer Account
-  - [ ] Add Apple Sign-In capability in Xcode
+- [ ] **Apple Sign-In** (Phase 2 - Not Enabled):
+  - Deferred to Phase 2
+  - Requires Apple Developer Program membership
+  - Will be configured when ready for App Store submission
   
-- [ ] **Phone Authentication**:
-  - [ ] Enable Phone provider
-  - [ ] Configure reCAPTCHA (web)
-  - [ ] Add test phone numbers for development
+- [x] **Phone Authentication**:
+  - [x] Enable Phone provider
+  - [x] Configure reCAPTCHA (web)
+  - [ ] Add test phone numbers for development (optional)
 
 ---
 

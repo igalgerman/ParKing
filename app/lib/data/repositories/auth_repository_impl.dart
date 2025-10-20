@@ -318,63 +318,6 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<User>> signInWithApple() async {
-    try {
-      // Sign in with Apple via Firebase Auth Service
-      final credential = await _authService.signInWithApple();
-
-      if (credential.user == null) {
-        return const Failure(
-          AuthenticationError('Apple sign-in failed - no user returned'),
-        );
-      }
-
-      final firebaseUser = credential.user!;
-
-      // Check if user document exists in Firestore
-      final existingUser = await _userDataSource.getUserById(firebaseUser.uid);
-
-      if (existingUser != null) {
-        // Existing user - update last login
-        await _userDataSource.updateLastLogin(firebaseUser.uid);
-        return Success(UserMapper.fromDto(existingUser));
-      }
-
-      // New user - create Firestore document
-      final newUserDto = UserDto(
-        id: firebaseUser.uid,
-        email: firebaseUser.email ?? 'private@appleid.com',
-        displayName: firebaseUser.displayName ?? 'Apple User',
-        phoneNumber: firebaseUser.phoneNumber,
-        photoUrl: firebaseUser.photoURL,
-        role: 'both',
-        createdAt: Timestamp.now(),
-        lastLoginAt: Timestamp.now(),
-        stats: UserStatsDto(
-          spotsPublished: 0,
-          spotsPurchased: 0,
-          successfulTransactions: 0,
-          disputedTransactions: 0,
-        ),
-        settings: UserSettingsDto(
-          notificationsEnabled: true,
-          defaultSearchRadius: 1.0,
-          preferredLanguage: 'en',
-          biometricEnabled: false,
-        ),
-      );
-
-      await _userDataSource.createUser(newUserDto);
-
-      return Success(UserMapper.fromDto(newUserDto));
-    } on firebase_auth.FirebaseAuthException catch (e) {
-      return Failure(_mapFirebaseAuthError(e));
-    } catch (e) {
-      return Failure(AuthenticationError('Apple sign-in failed: ${e.toString()}'));
-    }
-  }
-
-  @override
   Future<Result<String>> sendPhoneVerificationCode({
     required String phoneNumber,
   }) async {

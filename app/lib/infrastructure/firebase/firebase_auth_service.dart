@@ -6,7 +6,6 @@ library;
 
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// Service for Firebase Authentication operations.
 ///
@@ -130,29 +129,6 @@ class FirebaseAuthService {
 
     // Sign in to Firebase with the Google credential
     return await _firebaseAuth.signInWithCredential(credential);
-  }
-
-  /// Signs in with Apple account.
-  ///
-  /// Opens Apple Sign-In flow and returns Firebase credential.
-  /// Throws [firebase_auth.FirebaseAuthException] or [SignInWithAppleException] on failure.
-  Future<firebase_auth.UserCredential> signInWithApple() async {
-    // Request Apple ID credential
-    final appleCredential = await SignInWithApple.getAppleIDCredential(
-      scopes: [
-        AppleIDAuthorizationScopes.email,
-        AppleIDAuthorizationScopes.fullName,
-      ],
-    );
-
-    // Create an OAuthProvider credential
-    final oauthCredential = firebase_auth.OAuthProvider('apple.com').credential(
-      idToken: appleCredential.identityToken,
-      accessToken: appleCredential.authorizationCode,
-    );
-
-    // Sign in to Firebase with the Apple credential
-    return await _firebaseAuth.signInWithCredential(oauthCredential);
   }
 
   /// Verifies a phone number and triggers SMS code sending.
